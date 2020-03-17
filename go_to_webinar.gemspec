@@ -15,7 +15,7 @@ Gem::Specification.new do |spec|
   spec.homepage = 'https://github.com/RecruitiFi/go_to_webinar'.freeze
   spec.license       = 'MIT'
 
-  spec.files         = `git ls-files -z`.split('\x0').reject do |f|
+  spec.files         = `git ls-files -z`.split("\x0").reject do |f|
     f.match(%r{^(test|spec|features)/})
   end
   spec.bindir        = 'exe'
@@ -24,7 +24,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'rest-client','~> 2.0'
 
-  spec.add_development_dependency 'bundler', '~> 1.15'
+  spec.add_development_dependency 'bundler', '~> 2.1.4'
   spec.add_development_dependency 'rake', '~> 10.0'
   spec.add_development_dependency 'rspec', '~> 3.6'
   spec.add_development_dependency 'webmock', '~> 3.0'
