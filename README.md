@@ -1,6 +1,6 @@
 # GoToWebinar
 
-It is a Rubygem client to GoToWebinar API.
+A ruby client to connect GoToWebinar API.
 
 ## Installation
 
@@ -20,7 +20,15 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### Rails
+
+config/initializers/go_to_webinar.rb
+```ruby
+GoToWebinar.setup do |g2w|
+  g2w.organizer_key = ENV['G2W_ORGANIZER_KEY']
+  g2w.access_token = ENV['G2W_ACCESS_TOKEN']
+end
+```
 
 ## Development
 
@@ -30,7 +38,9 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/dannnylo/go_to_webinar.
+The repository maintainer only intends to add the functionality necessary for the maintainers need, this will not include all functionality or support all API of GoToWebinar. If you would like to contribute, pull requests are welcome.
+ 
+Bug reports and pull requests are welcome on GitHub at https://github.com/RecruitiFi/go_to_webinar.
 
 ## License
 
