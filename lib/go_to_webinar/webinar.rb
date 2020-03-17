@@ -8,6 +8,11 @@ module GoToWebinar
       @data['webinarKey'].to_s
     end
 
+    def add_registrant(first_name:, last_name:, email:)
+      data = {first_name: first_name, last_name: last_name, email: email}
+      Registrant.create(webinar_key: webinar_key, data: data)
+    end
+
     def self.find(webinar_key:)
       data = GoToWebinar.client.get("/organizers/:organizer_key:/webinars/#{webinar_key}")
       Webinar.new(data)
