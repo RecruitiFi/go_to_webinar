@@ -9,8 +9,10 @@ module GoToWebinar
     end
 
     def add_registrant(first_name:, last_name:, email:)
-      data = {first_name: first_name, last_name: last_name, email: email}
-      Registrant.create(webinar_key: webinar_key, data: data)
+      Registrant.create(
+        webinar_key: webinar_key,
+        data: { firstName: first_name, lastName: last_name, email: email }.to_json
+      )
     end
 
     def self.find(webinar_key:)

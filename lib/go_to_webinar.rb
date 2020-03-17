@@ -4,6 +4,7 @@ require "go_to_webinar/version"
 require "go_to_webinar/configuration"
 require "go_to_webinar/client"
 require "go_to_webinar/webinar"
+require "go_to_webinar/registrant"
 
 module GoToWebinar
   class << self

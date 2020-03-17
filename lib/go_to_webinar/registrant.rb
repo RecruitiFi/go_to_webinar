@@ -13,7 +13,7 @@ module GoToWebinar
     end
 
     def join_url
-      @data['join_url']
+      @data['joinUrl'].to_s
     end
 
     def destroy
