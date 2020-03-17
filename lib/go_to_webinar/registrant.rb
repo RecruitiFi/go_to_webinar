@@ -13,7 +13,7 @@ module GoToWebinar
     end
 
     def join_url
-      @data['joinUrl'].to_s
+      @data['joinrl'].to_s
     end
 
     def destroy
@@ -22,7 +22,7 @@ module GoToWebinar
 
     def self.create(webinar_key:, data:)
       data = GoToWebinar.client.post("/organizers/:organizer_key:/webinars/#{webinar_key}/registrants", data)
-      Registrant.make(data)
+      Registrant.new(data)
     end
 
     def self.all(webinar_key:)
@@ -30,7 +30,7 @@ module GoToWebinar
     end
 
     def self.find(webinar_key:, registrant_key:)
-      make(GoToWebinar.client.get("/organizers/:organizer_key:/webinars/#{webinar_key}/registrants/#{registrant_key}"))
+      Registrant.new(GoToWebinar.client.get("/organizers/:organizer_key:/webinars/#{webinar_key}/registrants/#{registrant_key}"))
     end
 
     def self.make(data)
