@@ -15,6 +15,14 @@ module GoToWebinar
       )
     end
 
+    def sessions
+      Session.for_webinar(webinar_key: webinar_key)
+    end
+
+    def get_session(session_key:)
+      Session.find(webinar_key: webinar_key, session_key: session_key)
+    end
+
     def self.find(webinar_key:)
       data = GoToWebinar.client.get("/organizers/:organizer_key:/webinars/#{webinar_key}")
       Webinar.new(data)
