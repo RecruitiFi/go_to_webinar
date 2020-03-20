@@ -1,6 +1,6 @@
 # GoToWebinar
 
-A ruby client to connect GoToWebinar API.
+A ruby client to connect GoToWebinar API V1. Will handle the complete OAuth lifecycle as well utilizing Redis and the OAuth2 gems.
 
 ## Installation
 
@@ -28,17 +28,23 @@ GoToWebinar.setup do |g2w|
   g2w.organizer_key = ENV['G2W_ORGANIZER_KEY']
   g2w.access_token = ENV['G2W_ACCESS_TOKEN']
 end
+
+GoToWebinar::Auth.setup do |oauth2|
+  oauth2.redis_url = ENV['REDISCLOUD_URL']
+  oauth2.consumer_key = ENV['G2W_CONSUMER_KEY']
+  oauth2.secret_key = ENV['G2W_SECRET_KEY']
+  oauth2.basic_auth_username = ENV['G2W_BASIC_AUTH_USERNAME']
+  oauth2.basic_auth_password = ENV['G2W_BASIC_AUTH_PASSWORD']
+end
 ```
 
-## Development
+## Authentication Strategy
 
-After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+This gem will use your username and password to handle all OAuth authentication with GoToWebinar using a basic auth strategy. This does require use of the GoToWebinar log in credentials. It is advised you fully read and understand the different OAuth Flows and use the best one for your situation: https://auth0.com/docs/api-auth/which-oauth-flow-to-use
 
 ## Contributing
 
-The repository maintainer only intends to add the functionality necessary for the maintainers need, this will not include all functionality or support all API of GoToWebinar. If you would like to contribute, pull requests are welcome.
+The repository maintainer only intends to add the functionality necessary for the maintainers need, this may not include all functionality or support all API of GoToWebinar. If you would like to contribute, pull requests are welcome.
  
 Bug reports and pull requests are welcome on GitHub at https://github.com/RecruitiFi/go_to_webinar.
 
