@@ -9,19 +9,20 @@ module GoToWebinar
       def initialize(basic_auth_username: nil, basic_auth_password: nil, consumer_key: nil, secret_key: nil)
         config = GoToWebinar::Auth.configuration
         @redis = Redis.new(url: config.redis_url)
-        @basic_auth_username = basic_auth_username || config.basic_auth_username
-        @basic_auth_password = basic_auth_password || config.basic_auth_password
+        @basic_auth_username = config.basic_auth_username
+        @basic_auth_password = config.basic_auth_password
         @consumer_key = consumer_key || config.consumer_key
         @secret_key = secret_key || config.secret_key
         @site = config.site
         @authorize_url = config.authorize_url
+        @authorize_optional_params = config.authorize_optional_params
         @token_url = config.token_url
         @auth_scheme = config.auth_scheme
         @oauth2_client = new_oauth2_client
       end
 
       def new_oauth2_client
-        oauth2_client = OAuth2::Client.new(
+        OAuth2::Client.new(
           consumer_key,
           secret_key,
           site: site,
@@ -47,7 +48,7 @@ module GoToWebinar
 
       private
 
-      attr_accessor :redis, :site, :authorize_url, :authorize_url_optional_params
+      attr_accessor :redis, :site, :authorize_url, :authorize_optional_params
       attr_accessor :token_url, :auth_scheme, :oauth2_client
 
       def get_access_token_from_redis(redis_key: 'g2w_access_token')
@@ -56,7 +57,10 @@ module GoToWebinar
         token_hash = JSON.parse(token_json)&.[]("token") if token_json
         @access_token = OAuth2::AccessToken.from_hash(oauth2_client, token_hash) if token_hash
 
-        # if we found it redis, let's return it
+        # if we found it in redis, and it's expired, let's just refresh it
+        @access_token = refresh_access_token if @access_token&.expired?
+
+        # let's return it if we got it =)
         return @access_token if @access_token
 
         # if it doesn't currently exist in redis, return nil
@@ -72,18 +76,18 @@ module GoToWebinar
           consumer_key,
           secret_key,
           site: site,
-          authorize_url: authorize_url,
+          authorize_url: authorize_url_with_params,
           token_url: token_url,
           auth_scheme: auth_scheme
         )
       end
 
-      def authorize_url
+      def authorize_url_with_params
         authorize_url + '?' + authorize_url_params
       end
 
       def authorize_url_params
-        URI.encode_www_form({client_id: consumer_key}.merge(authorize_url_optional_params))
+        URI.encode_www_form({client_id: consumer_key}.merge(authorize_optional_params))
       end
     end
   end

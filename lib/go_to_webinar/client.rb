@@ -45,7 +45,7 @@ module GoToWebinar
         retries ||= 0
         yield
       rescue RestClient::Forbidden => exception
-        raise unless (retires += 1) < 2
+        raise unless (retries += 1) < 2
         raise unless int_error_code(exception) == "InvalidToken"
         raise unless @access_token&.expired?
 
