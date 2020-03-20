@@ -1,6 +1,6 @@
 require 'oauth2'
-require 'auth/client'
-require 'auth/configuration'
+require 'lib/auth/client'
+require 'lib/auth/configuration'
 
 module GoToWebinar
   module Auth
