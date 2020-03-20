@@ -49,3 +49,19 @@ module GoToWebinar
     end
   end
 end
+
+# invitations = event.invitations
+# corrupted = []
+# attendees.each do |attendee|
+#   invitation = invitations.where(g2w_registrant_key: attendee.registrant_key)
+
+#   if invitation
+#     begin
+#       invitation.update(
+#         arrived_at: attendee.attendance.first["joinTime"].to_datetime
+#       )
+#     rescue StandardError => e
+#       corrupted << { invitation: invitation, attendee: attendee, exception: e }
+#     end
+#   end
+# end

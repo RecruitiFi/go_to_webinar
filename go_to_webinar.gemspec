@@ -23,6 +23,8 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_dependency 'rest-client','~> 2.0'
+  spec.add_dependency 'oauth2', '~> 1.4.4'
+  spec.add_dependency 'redis', '~> 4.0'
 
   spec.add_development_dependency 'bundler', '~> 2.1.4'
   spec.add_development_dependency 'rake', '~> 10.0'
