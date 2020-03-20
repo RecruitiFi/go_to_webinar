@@ -6,7 +6,7 @@ module GoToWebinar
     class Client
       attr_accessor :basic_auth_username, :basic_auth_password, :consumer_key, :secret_key
       
-      def initialize(basic_auth_username:, basic_auth_password:, consumer_key:, secret_key:)
+      def initialize(basic_auth_username: nil, basic_auth_password: nil, consumer_key: nil, secret_key: nil)
         config = GoToWebinar::Auth.configuration
         @redis = Redis.new(url: config.redis_url)
         @basic_auth_username = basic_auth_username || config.basic_auth_username
