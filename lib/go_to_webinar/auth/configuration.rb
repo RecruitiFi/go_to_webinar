@@ -1,4 +1,4 @@
-module GoToWebinar::OAuth2
+module GoToWebinar::Auth
   class Configuration
     attr_accessor :redis_url, :consumer_key, :secret_key, :site
     attr_accessor :authorize_url, :token_url, :auth_scheme
@@ -6,11 +6,11 @@ module GoToWebinar::OAuth2
     attr_accessor :authorize_optional_params
 
     def initialize
-      @site = GoToWebinar::OAuth2::Configuration.site
-      @authorize_url = GoToWebinar::OAuth2::Configuration.authorize_url
-      @authorize_optional_params = GoToWebinar::OAuth2::Configuration.authorize_optional_params
-      @token_url = GoToWebinar::OAuth2::Configuration.token_url
-      @auth_scheme = GoToWebinar::OAuth2::Configuration.auth_scheme
+      @site = GoToWebinar::Auth::Configuration.site
+      @authorize_url = GoToWebinar::Auth::Configuration.authorize_url
+      @authorize_optional_params = GoToWebinar::Auth::Configuration.authorize_optional_params
+      @token_url = GoToWebinar::Auth::Configuration.token_url
+      @auth_scheme = GoToWebinar::Auth::Configuration.auth_scheme
     end
 
     def self.site

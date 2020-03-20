@@ -1,9 +1,12 @@
-module GoToWebinar::OAuth2
+require 'oauth2'
+require 'redis'
+
+module GoToWebinar::Auth
   class Client
     attr_accessor :basic_auth_username, :basic_auth_password, :consumer_key, :secret_key
     
     def initialize(basic_auth_username:, basic_auth_password:, consumer_key:, secret_key:)
-      config = GoToWebinar::OAuth2.configuration
+      config = GoToWebinar::Auth.configuration
       @redis = Redis.new(url: config.redis_url)
       @basic_auth_username = basic_auth_username || config.basic_auth_username
       @basic_auth_password = basic_auth_password || config.basic_auth_password

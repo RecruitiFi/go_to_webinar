@@ -1,17 +1,18 @@
-require 'oauth2/client'
-require 'oauth2/configuration'
+require 'oauth2'
+require_relative 'auth/client'
+require_relative 'auth/configuration'
 
 module GoToWebinar
-  class OAuth2
+  class Auth
     class << self
       attr_accessor :client, :configuration
 
       def client
-        @client ||= GoToWebinar::OAuth2::Client.new
+        @client ||= GoToWebinar::Auth::Client.new
       end
 
       def configuration
-        @configuration ||= GoToWebinar::OAuth2::Configuration.new
+        @configuration ||= GoToWebinar::Auth::Configuration.new
       end
 
       def setup

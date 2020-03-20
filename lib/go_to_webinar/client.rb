@@ -6,7 +6,7 @@ module GoToWebinar
       config = GoToWebinar.configuration
       @url = url || config.url
       @organizer_key = organizer_key || config.organizer_key
-      @g2w_oauth2_client = GoToWebinar::OAuth2::Client.new
+      @g2w_oauth2_client = GoToWebinar::Auth::Client.new
       @access_token = @g2w_oauth2_client.access_token&.token || config.access_token
     end
 
