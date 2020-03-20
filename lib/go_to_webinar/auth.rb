@@ -1,9 +1,9 @@
 require 'oauth2'
-require_relative 'auth/client'
-require_relative 'auth/configuration'
+require './auth/client'
+require './auth/configuration'
 
 module GoToWebinar
-  class Auth
+  module Auth
     class << self
       attr_accessor :client, :configuration
 

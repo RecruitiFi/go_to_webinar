@@ -1,13 +1,13 @@
 require 'rest-client'
 require 'json'
-require 'go_to_webinar/attendee'
-require 'go_to_webinar/client'
-require 'go_to_webinar/configuration'
-require 'go_to_webinar/auth'
-require 'go_to_webinar/registrant'
-require 'go_to_webinar/session'
-require 'go_to_webinar/version'
-require 'go_to_webinar/webinar'
+require_relative 'go_to_webinar/attendee'
+require_relative 'go_to_webinar/client'
+require_relative 'go_to_webinar/configuration'
+require_relative 'go_to_webinar/auth'
+require_relative 'go_to_webinar/registrant'
+require_relative 'go_to_webinar/session'
+require_relative 'go_to_webinar/version'
+require_relative 'go_to_webinar/webinar'
 
 module GoToWebinar
   class << self
