@@ -10,8 +10,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Danilo Jeremias da Silva', 'Michael Bennett']
   spec.email         = ['daniloj.dasilva@gmail.com', 'michael@michaelbennett.nyc']
 
-  spec.summary       = 'Client for Go To Webinar API.'
-  spec.description   = 'Client for Go To Webinar API.'
+  spec.summary       = 'Ruby SDK for GoToWebinar'
+  spec.description   = 'Full client including authentication for GoToWebinar API V1'
   spec.homepage = 'https://github.com/RecruitiFi/go_to_webinar'.freeze
   spec.license       = 'MIT'
 
@@ -23,10 +23,10 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_dependency 'rest-client','~> 2.0'
-  spec.add_dependency 'oauth2', '~> 1.4.4'
+  spec.add_dependency 'oauth2', '~> 1.4', '>= 1.4.4'
   spec.add_dependency 'redis', '~> 4.0'
 
-  spec.add_development_dependency 'bundler', '~> 2.1.4'
+  spec.add_development_dependency 'bundler', '~> 2.1', '>= 2.1.4'
   spec.add_development_dependency 'rake', '~> 10.0'
   spec.add_development_dependency 'rspec', '~> 3.6'
   spec.add_development_dependency 'webmock', '~> 3.0'
