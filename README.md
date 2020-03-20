@@ -2,6 +2,12 @@
 
 A ruby client to connect GoToWebinar API V1. Will handle the complete OAuth lifecycle as well utilizing Redis and the OAuth2 gems.
 
+## Caution
+
+This gem is still under active development and may become unstable version to version with no promises of backward compatibility, the objective is to reach some semblence of reliability by v0.5.x -- in the interim, if you find a version that works for you, strictly specify that version in your gem file.
+
+During this period of development, documentation and testing will be minimal and or non-existant.
+
 ## Installation
 
 Add this line to your application's Gemfile:
