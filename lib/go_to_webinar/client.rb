@@ -36,7 +36,7 @@ module GoToWebinar
     end
 
     def make_path(path)
-      path = path.split(':organizer_key').join(organizer_key)
+      path = path.split(':organizer_key:').join(organizer_key)
       "#{url}#{path}"
     end
 
