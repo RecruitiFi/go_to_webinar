@@ -12,15 +12,20 @@ require 'go_to_webinar/version'
 require 'go_to_webinar/webinar'
 
 module GoToWebinar
-  @client ||= GoToWebinar::Client.new
-  @configuration ||= GoToWebinar::Configuration.new
-
   class << self
     attr_accessor :client, :configuration
 
     def setup
       yield(configuration)
       @client = nil
+    end
+
+    def client
+      @client ||= GoToWebinar::Client.new
+    end
+
+    def configuration
+      @configuration ||= Configuration.new
     end
   end
 end
