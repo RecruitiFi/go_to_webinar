@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module GoToWebinar
   class Session
     def initialize(data)
@@ -55,7 +57,7 @@ module GoToWebinar
     end
 
     def self.all
-      make(GoToWebinar.client.get("/organizers/:organizer_key:/sessions"))
+      make(GoToWebinar.client.get('/organizers/:organizer_key:/sessions'))
     end
 
     def self.make(data)

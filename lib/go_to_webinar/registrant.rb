@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module GoToWebinar
   class Registrant
     def initialize(data)

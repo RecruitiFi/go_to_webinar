@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module GoToWebinar
   module Auth
     class Configuration
@@ -7,11 +9,11 @@ module GoToWebinar
       attr_accessor :authorize_optional_params
 
       def initialize
-        @site = GoToWebinar::Auth::Configuration.site
-        @authorize_url = GoToWebinar::Auth::Configuration.authorize_url
-        @authorize_optional_params = GoToWebinar::Auth::Configuration.authorize_optional_params
-        @token_url = GoToWebinar::Auth::Configuration.token_url
-        @auth_scheme = GoToWebinar::Auth::Configuration.auth_scheme
+        @site = self.class.site
+        @authorize_url = self.class.authorize_url
+        @authorize_optional_params = self.class.authorize_optional_params
+        @token_url = self.class.token_url
+        @auth_scheme = self.class.auth_scheme
       end
 
       def self.site
@@ -23,7 +25,7 @@ module GoToWebinar
       end
 
       def self.authorize_optional_params
-        { response_type: "code" }
+        { response_type: 'code' }
       end
 
       def self.token_url

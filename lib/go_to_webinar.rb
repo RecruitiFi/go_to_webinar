@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rest-client'
 require 'json'
 require 'go_to_webinar/attendee'
@@ -10,16 +12,11 @@ require 'go_to_webinar/version'
 require 'go_to_webinar/webinar'
 
 module GoToWebinar
+  @client ||= GoToWebinar::Client.new
+  @configuration ||= GoToWebinar::Configuration.new
+
   class << self
     attr_accessor :client, :configuration
-
-    def client
-      @client ||= GoToWebinar::Client.new
-    end
-
-    def configuration
-      @configuration ||= Configuration.new
-    end
 
     def setup
       yield(configuration)

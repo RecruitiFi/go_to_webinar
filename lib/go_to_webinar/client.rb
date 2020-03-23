@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module GoToWebinar
   class Client
     attr_accessor :url, :organizer_key, :access_token
@@ -41,21 +43,19 @@ module GoToWebinar
     private
 
     def attempt
-      begin
-        retries ||= 0
-        yield
-      rescue RestClient::Forbidden => exception
-        raise unless (retries += 1) < 2
-        raise unless int_error_code(exception) == "InvalidToken"
-        raise unless @access_token&.expired?
+      retries ||= 0
+      yield
+    rescue RestClient::Forbidden => e
+      raise unless (retries += 1) < 2
+      raise unless int_error_code(e) == 'InvalidToken'
+      raise unless @g2w_oauth2_client&.access_token&.expired?
 
-        @access_token = @g2w_oauth2_client.refresh_access_token.token
-        retry
-      end
+      @access_token = @g2w_oauth2_client.refresh_access_token.token
+      retry
     end
 
     def int_error_code(exception)
-      JSON.parse(exception&.http_body)&.[]("int_err_code")
+      JSON.parse(exception&.http_body)&.[]('int_err_code')
     end
 
     def parse(response)

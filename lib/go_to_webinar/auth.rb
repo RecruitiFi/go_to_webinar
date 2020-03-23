@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'oauth2'
 require 'go_to_webinar/auth/client'
 require 'go_to_webinar/auth/configuration'

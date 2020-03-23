@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'oauth2'
 require 'redis'
 
@@ -5,7 +7,7 @@ module GoToWebinar
   module Auth
     class Client
       attr_accessor :basic_auth_username, :basic_auth_password, :consumer_key, :secret_key
-      
+
       def initialize(basic_auth_username: nil, basic_auth_password: nil, consumer_key: nil, secret_key: nil)
         config = GoToWebinar::Auth.configuration
         @redis = Redis.new(url: config.redis_url)
@@ -54,8 +56,10 @@ module GoToWebinar
       def get_access_token_from_redis(redis_key: 'g2w_access_token')
         # retrieve from redis
         token_json = @redis.get(redis_key)
-        token_hash = JSON.parse(token_json)&.[]("token") if token_json
-        @access_token = OAuth2::AccessToken.from_hash(oauth2_client, token_hash) if token_hash
+        token_hash = JSON.parse(token_json)&.[]('token') if token_json
+        if token_hash
+          @access_token = OAuth2::AccessToken.from_hash(oauth2_client, token_hash)
+        end
 
         # if we found it in redis, and it's expired, let's just refresh it
         @access_token = refresh_access_token if @access_token&.expired?
@@ -87,7 +91,7 @@ module GoToWebinar
       end
 
       def authorize_url_params
-        URI.encode_www_form({client_id: consumer_key}.merge(authorize_optional_params))
+        URI.encode_www_form({ client_id: consumer_key }.merge(authorize_optional_params))
       end
     end
   end
