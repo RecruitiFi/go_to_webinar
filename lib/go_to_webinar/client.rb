@@ -46,12 +46,17 @@ module GoToWebinar
       retries ||= 0
       yield
     rescue RestClient::Forbidden => e
-      raise unless (retries += 1) < 2
-      raise unless int_error_code(e) == 'InvalidToken'
-      raise unless @g2w_oauth2_client&.access_token&.expired?
-
-      @access_token = @g2w_oauth2_client.refresh_access_token.token
-      retry
+      raise unless (retries += 1) <= 2
+      
+      if retries < 2
+        raise unless int_error_code(e) == 'InvalidToken'
+        raise unless @g2w_oauth2_client&.access_token&.expired?
+        @access_token = @g2w_oauth2_client.refresh_access_token.token
+        retry
+      elsif retries == 3
+        @g2w_oauth2_client.get_new_access_token
+        retry
+      end
     end
 
     def int_error_code(exception)
